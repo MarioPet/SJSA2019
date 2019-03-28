@@ -1,0 +1,25 @@
+html, body {
+    font-family: sans-serif;
+}
+
+.q-buttons {
+    background: #3498db;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    width: 60px;
+    border: 0px;
+    padding: 8px 0px;
+    cursor: pointer;
+}
+
+.q-value {
+    font-size: 24px;
+    font-weight: bold;
+    display: inline-block;
+    margin: 0px 20px;
+}
+
+.todos-container {
+    margin: 50px 0px 0px 0px;
+}

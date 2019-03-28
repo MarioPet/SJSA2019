@@ -1,5 +1,7 @@
 import React from "react";
 import { Movies } from "./Movies";
+import { Quantity } from "./Quantity";
+import { Todos } from "./Todos";
 
 export class App extends React.Component {
 
@@ -7,17 +9,35 @@ export class App extends React.Component {
         super(props);
 
         this.state = {
-            name: ""
+            name: "",
+            quantity: 1
         }
 
-        this.nameChange = this.nameChange.bind(this); 
-
+        this.nameChange = this.nameChange.bind(this);
+        this.increment = this.increment.bind(this);
+        this.decrement = this.decrement.bind(this);
     }
 
     nameChange(e) {
         this.setState({
             name: e.target.value
         });
+    }
+
+    increment() {
+        this.setState((state) => {
+            return {
+                quantity: state.quantity >= 10 ? 10 : state.quantity + 1   
+            } 
+        })
+    }
+
+    decrement() {
+        this.setState((state) => {
+            return {
+                quantity: state.quantity <= 0 ? 0 : state.quantity - 1   
+            } 
+        })
     }
 
     render() {
@@ -43,6 +63,14 @@ export class App extends React.Component {
                     />
                     <h2>{this.state.name}</h2>
                 </div>
+
+                <Quantity 
+                    quantity={this.state.quantity}
+                    increment={this.increment}
+                    decrement={this.decrement}
+                />
+
+                <Todos />
             </div>
         )
     } 
