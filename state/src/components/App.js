@@ -2,6 +2,7 @@ import React from "react";
 import { Movies } from "./Movies";
 import { Quantity } from "./Quantity";
 import { Todos } from "./Todos";
+import { Login } from "./Login";
 
 export class App extends React.Component {
 
@@ -10,20 +11,48 @@ export class App extends React.Component {
 
         this.state = {
             name: "",
-            quantity: 1
+            quantity: 1,
+            username: "",
+            password: "",
+            isLoggedIn: false
         }
 
         this.nameChange = this.nameChange.bind(this);
         this.increment = this.increment.bind(this);
         this.decrement = this.decrement.bind(this);
+        this.loginOnChange = this.loginOnChange.bind(this);
+        this.LogIn = this.LogIn.bind(this);
     }
 
+    // Loggs User and display TODO Container
+    LogIn() {
+        if(this.state.username === "pero123" && this.state.password === "secret") {
+            this.setState({
+                isLoggedIn: true
+            });
+        } else {
+            alert("Wrong credentials! Try again.");
+        }
+    }
+
+    // Login form onChange handler
+    loginOnChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        }, () => {
+            // console.log("USERNAME", this.state.username);
+            // console.log("PASSWORD", this.state.password);
+        })
+    }
+
+    // Enter your name onChange handler
     nameChange(e) {
         this.setState({
             name: e.target.value
         });
     }
 
+    // Add one item to quantity
     increment() {
         this.setState((state) => {
             return {
@@ -32,6 +61,7 @@ export class App extends React.Component {
         })
     }
 
+    // Take one item from quantity
     decrement() {
         this.setState((state) => {
             return {
@@ -70,7 +100,13 @@ export class App extends React.Component {
                     decrement={this.decrement}
                 />
 
-                <Todos />
+                <br /> <br />
+
+                <Login 
+                    loginOnChange={this.loginOnChange}
+                    logIn={this.LogIn}
+                />
+                { this.state.isLoggedIn ? <Todos /> : null }
             </div>
         )
     } 

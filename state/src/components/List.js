@@ -8,7 +8,13 @@ export class List extends React.Component {
                     {
                         this.props.todos.map((todo, i) => {
                             return (
-                                <li key={i}>{todo}</li>
+                                <li className={todo.checked ? "line-through" : ""} key={i}> 
+                                    {todo.name}
+                                    <input 
+                                        onChange={() => this.props.checkboxChangeHandle(todo.id)} type="checkbox" 
+                                        checked={todo.checked} 
+                                    />
+                                </li>
                             )
                         })
                     }
