@@ -14,7 +14,8 @@ export class App extends React.Component {
             quantity: 1,
             username: "",
             password: "",
-            isLoggedIn: false
+            isLoggedIn: false,
+            inputType: "password"
         }
 
         this.nameChange = this.nameChange.bind(this);
@@ -22,6 +23,15 @@ export class App extends React.Component {
         this.decrement = this.decrement.bind(this);
         this.loginOnChange = this.loginOnChange.bind(this);
         this.LogIn = this.LogIn.bind(this);
+        this.TogglePasswordView = this.TogglePasswordView.bind(this);
+    }
+
+    TogglePasswordView() {
+        this.setState((state) => {
+            return {
+                inputType: state.inputType === "password" ? "text" : "password"
+            }
+        });
     }
 
     // Loggs User and display TODO Container
@@ -105,6 +115,8 @@ export class App extends React.Component {
                 <Login 
                     loginOnChange={this.loginOnChange}
                     logIn={this.LogIn}
+                    inputType={this.state.inputType}
+                    TogglePasswordView={this.TogglePasswordView}
                 />
                 { this.state.isLoggedIn ? <Todos /> : null }
             </div>
