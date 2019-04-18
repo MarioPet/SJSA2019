@@ -1,5 +1,7 @@
 const initialState = {
-    currencies: []
+    currencies: [],
+    selectedCurrency: null,
+    exchangeData: {}
 }
 
 const CurrencyReducer = (state = initialState, action) => {
@@ -8,6 +10,21 @@ const CurrencyReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currencies: action.payload
+            }
+        case "SELECT_CURRENCY" :
+            return {
+                ...state,
+                selectedCurrency: action.payload
+            }
+        case "FETCH_EXCHANGE_DATA" :
+            return {
+                ...state,
+                exchangeData: action.payload
+            }
+        case "FETCH_EXCHANGE_DATA_ERROR" :
+            return {
+                ...state,
+                exchangeData: {}
             }
         default: return state;
     }
